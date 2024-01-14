@@ -8,13 +8,20 @@
 //
 // Execute `rustlings hint traits2` or use the `hint` watch subcommand for a hint.
 
-// I AM NOT DONE
 
 trait AppendBar {
     fn append_bar(self) -> Self;
 }
 
-// TODO: Implement trait `AppendBar` for a vector of strings.
+// Newtype wrapper around Vec<String>
+struct StringVecWrapper(Vec<String>);
+
+impl AppendBar for StringVecWrapper {
+    fn append_bar(mut self) -> Self {
+        self.0.push(String::from("Bar"));
+        self
+    }
+}
 
 #[cfg(test)]
 mod tests {
@@ -22,7 +29,8 @@ mod tests {
 
     #[test]
     fn is_vec_pop_eq_bar() {
-        let mut foo = vec![String::from("Foo")].append_bar();
+        let mut foo = StringVecWrapper(vec![String::from("Foo")]).append_bar().0;
+
         assert_eq!(foo.pop().unwrap(), String::from("Bar"));
         assert_eq!(foo.pop().unwrap(), String::from("Foo"));
     }

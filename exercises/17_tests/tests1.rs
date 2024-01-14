@@ -10,12 +10,28 @@
 // Execute `rustlings hint tests1` or use the `hint` watch subcommand for a
 // hint.
 
-// I AM NOT DONE
+
+fn test_of_test (value:i32)->bool{
+    if value < 0 {
+        false
+    }else{
+        true
+    }
+}
 
 #[cfg(test)]
 mod tests {
+    use crate::test_of_test;
+
     #[test]
-    fn you_can_assert() {
-        assert!();
+    fn you_can_assert1() {
+        let a: i32 = 1980;
+        assert_eq!(test_of_test(a), true);
+    }
+
+    fn you_can_assert2() {
+        let b: i32 = -321;
+        assert_eq!(test_of_test(b), true);
+        
     }
 }
